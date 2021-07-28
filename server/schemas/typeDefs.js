@@ -10,13 +10,21 @@ const typeDefs = gql`
     }
 
     type Book {
-        _id: ID
+        bookId: ID!
+        authors: [String]
+        description: String
+        image: String
+        link: String
+        title: String!
+    }
+
+    input BookInput {
         authors: [String]
         description: String!
         bookId: String!
         image: String
         link: String
-        title: String
+        title: String!        
     }
 
     # Query : Entry Point to access GraphQL
@@ -26,8 +34,8 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addUser(username: String, email: String, password: String): User
-        addBook(userId: ID! authors: [String], description: String!, bookId: String!, image: String, link: String, title:String): User
+        addUser(username: String!, email: String!, password: String!): User
+        saveBook(bookData: BookInput!): User
         removeBook(userId: ID! userBookId: ID!): User
     }
 `
