@@ -19,8 +19,10 @@ const typeDefs = gql`
         title: String
     }
 
+    # Query : Entry Point to access GraphQL
     type Query {
         users: [User]
+        user(userId: ID!): User
     }
 `
 
