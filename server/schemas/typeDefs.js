@@ -24,6 +24,12 @@ const typeDefs = gql`
         users: [User]
         user(userId: ID!): User
     }
+
+    type Mutation {
+        addUser(username: String, email: String, password: String): User
+        addBook(userId: ID! authors: [String], description: String!, bookId: String!, image: String, link: String, title:String): User
+        removeBook(userId: ID! userBookId: ID!): User
+    }
 `
 
 
