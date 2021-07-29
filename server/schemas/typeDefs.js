@@ -29,13 +29,12 @@ const typeDefs = gql`
 
     # Query : Entry Point to access GraphQL
     type Query {
-        users: [User]
         user(userId: ID!): User
     }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): User
-        saveBook(bookData: BookInput!): User
+        saveBook(userId: String!, bookData: BookInput!): User
         removeBook(userId: ID! userBookId: ID!): User
     }
 `

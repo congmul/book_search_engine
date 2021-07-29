@@ -4,10 +4,6 @@ const { User } = require('../models');
 
 const resolvers = {
     Query: {
-      users: async () => {
-        return User.find({});
-      },
-
       user: async (parent, { userId }) => {
         return User.findOne({ _id: userId })
       }
@@ -15,22 +11,28 @@ const resolvers = {
 
     Mutation: {
       addUser: async (parent, {username, email, password}) =>{
-        return User.create({username: username, email: email, password: password});
+        const user = await User.create({username: username, email: email, password: password});
+        return user;
       },
 
-      addBook: async (parent, { userId, authors, description, bookId, image, link, title }) => {
-        // console.log(userId);
-        return User.findOneAndUpdate({ _id: userId }, {$push: { savedBooks: {authors: authors, description: description, bookId:bookId, image:image, link:link, title:title}}});
+      saveBook: async (parent, { userId, bookData }) => {
+        const updatedUser = User.findOneAndUpdate(
+          { _id: userId }, 
+          {$push: { savedBooks: bookData }}, 
+          { new: true }
+        );
+
+          return updatedUser;
       },
 
       removeBook: async(parent, { userId, userBookId }) =>{
-        console.log(userId)
-        console.log(userBookId)
-        return User.updateOne(
+        const updatedUser = User.updateOne(
           {_id: userId}, 
           { $pull: { savedBooks : { _id : userBookId }}},
           { new: true }
-          ) 
+        ); 
+
+          return updatedUser;
       }
   }
 }
