@@ -34,8 +34,7 @@ const typeDefs = gql`
 
     # Query : Entry Point to access GraphQL
     type Query {
-        users: [User]
-        user(userId: ID!): User
+        me: User
     }
 
     type Mutation {
