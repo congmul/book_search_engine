@@ -18,6 +18,11 @@ const typeDefs = gql`
         title: String!
     }
 
+    type Auth {
+        token: ID!
+        user: User
+    }
+
     input BookInput {
         authors: [String]
         description: String!
@@ -29,11 +34,15 @@ const typeDefs = gql`
 
     # Query : Entry Point to access GraphQL
     type Query {
+        users: [User]
         user(userId: ID!): User
     }
 
     type Mutation {
-        addUser(username: String!, email: String!, password: String!): User
+        # Set up mutations to handle creating a user or logging into a profile and return Auth type
+        addUser(username: String!, email: String!, password: String!): Auth
+        login(email: String!, password: String!): Auth
+
         saveBook(userId: String!, bookData: BookInput!): User
         removeBook(userId: ID! userBookId: ID!): User
     }
