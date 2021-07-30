@@ -16,6 +16,9 @@
 - [Questions](#Questions)
 
 ## About the Project
+- A user can search for new books to read and keep a list of books to purchase.
+
+- <img src='./operating.gif' width="500px">
 
 ## Technologies
  - MongoDB, Reactjs, Express, Node, GraphQL, Bootstrap
